@@ -1,7 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({ weight: ["400"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Dexola test",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${roboto.className} container py-5 px-10 mx-auto`}>
+        {children}
+      </body>
     </html>
   );
 }

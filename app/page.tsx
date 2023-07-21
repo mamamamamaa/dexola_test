@@ -1,14 +1,15 @@
 "use client";
 import { Web3 } from "@/components/Web3";
-import { Web3Button } from "@web3modal/react";
+import { Header } from "@/components/Header";
+import { WalletForm } from "@/components/WalletForm";
 
-export default function Home() {
+export default function App() {
   return (
     <Web3>
-      <header>
-        <Web3Button />
-      </header>
-      <main>hello</main>
+      <Header />
+      <main className="py-10">
+        <WalletForm />
+      </main>
     </Web3>
   );
 }

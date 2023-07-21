@@ -11,7 +11,11 @@ export const Web3: FC<Props> = ({ children }) => {
   return (
     <>
       <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      <Web3Modal
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+        themeMode={"light"}
+      />
     </>
   );
 };
