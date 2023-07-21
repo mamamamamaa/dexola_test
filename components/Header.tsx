@@ -10,9 +10,9 @@ export const Header: FC = () => {
   if (isConnecting || isReconnecting) return <Loader />;
 
   return (
-    <header className="flex justify-between items-center gap-5">
+    <header className="flex justify-between items-center gap-1">
       <Logo />
-      <Web3Button balance={"show"} />
+      <Web3Button balance={"show"} avatar={"hide"} icon={"hide"} />
     </header>
   );
 };

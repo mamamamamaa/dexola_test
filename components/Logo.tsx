@@ -6,7 +6,9 @@ export const Logo: FC = () => {
       <div className="bg-blue-500 h-8 w-8 flex items-center justify-center text-white font-semibold rounded-md">
         Му
       </div>
-      <div className="text-2xl font-bold text-gray-800">Web3</div>
+      <div className="text-2xl font-bold text-gray-800 hidden sm:block">
+        Web3
+      </div>
     </div>
   );
 };
