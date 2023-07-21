@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  output: "standalone",
 
-module.exports = nextConfig
+  env: {
+    PROJECT_ID: process.env.PROJECT_ID,
+  },
+};
+
+module.exports = nextConfig;
