@@ -1,37 +1,12 @@
-import { ChangeEventHandler, FC, FormEventHandler, useState } from "react";
-import { useDebounce } from "use-debounce";
-import {
-  usePrepareSendTransaction,
-  useSendTransaction,
-  useWaitForTransaction,
-} from "wagmi";
-import { parseEther } from "viem";
+import { FC, FormEventHandler } from "react";
+import { useCustomTransaction } from "@/hooks/useCustomTransaction";
 import style from "./WalletForm.module.css";
 
 const walletRegexp = new RegExp(/^0x[a-fA-F0-9]{40}$/);
 
 export const WalletForm: FC = () => {
-  const [wallet, setWallet] = useState<string>("");
-  const [debouncedWallet] = useDebounce(wallet, 500);
-  const [amount, setAmount] = useState<string>("");
-  const [debouncedAmount] = useDebounce(amount, 500);
-
-  const { config } = usePrepareSendTransaction({
-    to: debouncedWallet,
-    value: debouncedAmount ? parseEther(debouncedAmount) : undefined,
-  });
-
-  const { data, sendTransaction } = useSendTransaction(config);
-
-  const { isLoading, isSuccess } = useWaitForTransaction({
-    hash: data?.hash,
-  });
-
-  const handleSetWallet: ChangeEventHandler<HTMLInputElement> = ({ target }) =>
-    setWallet(target.value);
-
-  const handleSetAmount: ChangeEventHandler<HTMLInputElement> = ({ target }) =>
-    setAmount(target.value);
+  const { wallet, handleSetWallet, handleSetAmount, amount, sendTransaction } =
+    useCustomTransaction();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
