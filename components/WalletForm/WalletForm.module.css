@@ -1,0 +1,43 @@
+.formSection {
+    @apply relative py-3 sm:max-w-xl sm:mx-auto;
+}
+
+.rotatedFormBg {
+    @apply absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl;
+}
+
+.formBg {
+    @apply relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20;
+}
+
+.formContainer {
+    @apply max-w-md mx-auto;
+}
+
+.formHeading {
+    @apply text-2xl font-semibold;
+}
+
+.formBox {
+    @apply divide-y divide-gray-200;
+}
+
+.form {
+    @apply py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7;
+}
+
+.inputContainer {
+    @apply relative;
+}
+
+.input {
+    @apply placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-600;
+}
+
+.inputLabel {
+    @apply absolute left-0 -top-3.5 text-gray-600 text-sm transition-all;
+}
+
+.submitButton {
+    @apply bg-blue-500 text-white rounded-md px-4 py-1;
+}

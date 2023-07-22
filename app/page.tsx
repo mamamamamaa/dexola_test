@@ -1,7 +1,7 @@
 "use client";
 import { Web3 } from "@/components/Web3";
 import { Header } from "@/components/Header";
-import { WalletForm } from "@/components/WalletForm";
+import { WalletForm } from "@/components/WalletForm/WalletForm";
 
 export default function App() {
   return (
