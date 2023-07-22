@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import {
   usePrepareSendTransaction,
@@ -6,6 +6,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import { parseEther } from "viem";
+import { toast } from "react-hot-toast";
 
 export const useCustomTransaction = () => {
   const [wallet, setWallet] = useState<string>("");
@@ -13,15 +14,16 @@ export const useCustomTransaction = () => {
   const [amount, setAmount] = useState<string>("");
   const [debouncedAmount] = useDebounce(amount, 500);
 
-  const { config } = usePrepareSendTransaction({
+  const { config, error: prepareError } = usePrepareSendTransaction({
     to: debouncedWallet,
     value: debouncedAmount ? parseEther(debouncedAmount) : undefined,
   });
 
   const { data, sendTransaction } = useSendTransaction(config);
 
+  const hash = data?.hash;
   const { isLoading, isSuccess } = useWaitForTransaction({
-    hash: data?.hash,
+    hash,
   });
 
   const handleSetWallet: ChangeEventHandler<HTMLInputElement> = ({ target }) =>
@@ -29,6 +31,14 @@ export const useCustomTransaction = () => {
 
   const handleSetAmount: ChangeEventHandler<HTMLInputElement> = ({ target }) =>
     setAmount(target.value);
+
+  useEffect(() => {
+    if (prepareError?.name === "EstimateGasExecutionError")
+      toast.error("Insufficient funds for the operation");
+
+    // if (isSuccess) toast.success("Transaction is successful");
+    // else toast.error("Something went wrong");
+  }, [prepareError, isSuccess]);
 
   return {
     handleSetAmount,
@@ -38,5 +48,6 @@ export const useCustomTransaction = () => {
     amount,
     isLoading,
     isSuccess,
+    hash,
   };
 };

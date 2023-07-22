@@ -11,7 +11,8 @@ export const WalletForm: FC = () => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    sendTransaction?.();
+    console.log("fdsfsdfsd");
+    // sendTransaction?.();
   };
 
   return (
@@ -46,6 +47,7 @@ export const WalletForm: FC = () => {
                   min="0.000001"
                   max="100000"
                   step="0.000001"
+                  pattern="^0x[a-fA-F0-9]{40}$"
                   className={style.input}
                   placeholder="Coin amount"
                   onChange={handleSetAmount}
