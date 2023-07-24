@@ -1,0 +1,3 @@
+.submitButton {
+    @apply flex justify-center items-center gap-2 bg-blue-500 disabled:bg-blue-300 text-white rounded-md px-4 py-1;
+}

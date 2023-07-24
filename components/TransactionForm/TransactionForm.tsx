@@ -4,6 +4,8 @@ import { toast } from "react-hot-toast";
 import { MAX_AMOUNT, MIN_AMOUNT, walletRegExp } from "@/consts/transaction";
 import { amountValidation } from "@/utils/amountValidation";
 import style from "./TransactionForm.module.css";
+import { ButtonLoader } from "@/components/ButtonLoader/ButtonLoader";
+import { FormSubmitButton } from "@/components/FormSubmitButton/FormSubmitButton";
 
 export const TransactionForm: FC = () => {
   const {
@@ -14,6 +16,7 @@ export const TransactionForm: FC = () => {
     balance,
     sendTransaction,
     gasPrice,
+    isLoading,
   } = useCustomTransaction();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -28,8 +31,8 @@ export const TransactionForm: FC = () => {
     const isValidAmount = amountValidation(amount, balance, gasPrice);
 
     if (!isValidAmount) return toast.error("Invalid coin amount");
-    console.log("success");
-    // sendTransaction?.();
+
+    sendTransaction?.();
   };
 
   return (
@@ -51,6 +54,7 @@ export const TransactionForm: FC = () => {
                   placeholder="Wallet address"
                   onChange={handleSetWallet}
                   value={wallet}
+                  disabled={isLoading}
                 />
                 <label htmlFor="address" className={style.inputLabel}>
                   Wallet Address
@@ -68,13 +72,14 @@ export const TransactionForm: FC = () => {
                   placeholder="Coin amount"
                   onChange={handleSetAmount}
                   value={amount}
+                  disabled={isLoading}
                 />
                 <label htmlFor="amount" className={style.inputLabel}>
                   Coin Amount
                 </label>
               </div>
               <div className={style.inputContainer}>
-                <button className={style.submitButton}>Send</button>
+                <FormSubmitButton isLoading={isLoading} />
               </div>
             </form>
           </div>
