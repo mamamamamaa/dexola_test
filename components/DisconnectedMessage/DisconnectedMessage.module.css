@@ -1,7 +1,0 @@
-.messageSection {
-    @apply py-5 text-2xl;
-}
-
-.message {
-    @apply text-center border-b border-b-blue-500;
-}

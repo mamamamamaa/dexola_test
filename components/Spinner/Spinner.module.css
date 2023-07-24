@@ -1,0 +1,3 @@
+.loaderIcon {
+    @apply w-12 animate-spin;
+}
