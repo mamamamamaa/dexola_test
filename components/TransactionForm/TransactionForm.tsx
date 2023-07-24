@@ -2,6 +2,7 @@ import { FC, FormEventHandler } from "react";
 import { useCustomTransaction } from "@/hooks/useCustomTransaction";
 import { toast } from "react-hot-toast";
 import { MAX_AMOUNT, MIN_AMOUNT, walletRegExp } from "@/consts/transaction";
+import { amountValidation } from "@/utils/amountValidation";
 import style from "./TransactionForm.module.css";
 
 export const TransactionForm: FC = () => {
@@ -12,6 +13,7 @@ export const TransactionForm: FC = () => {
     amount,
     balance,
     sendTransaction,
+    gasPrice,
   } = useCustomTransaction();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -21,10 +23,12 @@ export const TransactionForm: FC = () => {
 
     if (!isValidWallet) return toast.error("Invalid wallet address");
 
-    console.log(Number(balance));
-    console.log(Number(amount));
-    console.log(Number(amount) < Number(balance));
+    if (!balance || !gasPrice) return toast.error("Something went wrong");
 
+    const isValidAmount = amountValidation(amount, balance, gasPrice);
+
+    if (!isValidAmount) return toast.error("Invalid coin amount");
+    console.log("success");
     // sendTransaction?.();
   };
 

@@ -3,6 +3,7 @@ import { useDebounce } from "use-debounce";
 import {
   useAccount,
   useBalance,
+  useFeeData,
   usePrepareSendTransaction,
   useSendTransaction,
   useWaitForTransaction,
@@ -12,6 +13,8 @@ import { toast } from "react-hot-toast";
 
 export const useCustomTransaction = () => {
   const { address } = useAccount();
+  const { data: feeData } = useFeeData();
+
   const { data: balanceData } = useBalance({ address });
   const [wallet, setWallet] = useState<string>("");
   const [debouncedWallet] = useDebounce(wallet, 500);
@@ -54,5 +57,6 @@ export const useCustomTransaction = () => {
     isSuccess,
     balance: balanceData?.formatted,
     hash,
+    gasPrice: feeData?.gasPrice,
   };
 };
