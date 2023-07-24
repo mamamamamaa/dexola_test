@@ -1,6 +1,6 @@
 "use client";
 
-import { Web3 } from "@/components/Web3";
+import { Web3 } from "@/components/Web3/Web3";
 import { Header } from "@/components/Header/Header";
 import { TransactionForm } from "@/components/TransactionForm/TransactionForm";
 
