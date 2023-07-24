@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Web3Button } from "@web3modal/react";
 import { Logo } from "@/components/Logo";
 import { useAccount } from "wagmi";
-import { Loader } from "@/components/Loader";
+import { Loader } from "@/components/Loader/Loader";
 
 import style from "./Header.module.css";
 
