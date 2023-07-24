@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Web3Button } from "@web3modal/react";
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/components/Logo/Logo";
 import { useAccount } from "wagmi";
 import { Loader } from "@/components/Loader/Loader";
 
