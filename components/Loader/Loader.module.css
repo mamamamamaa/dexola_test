@@ -1,5 +1,5 @@
 .loaderBackdrop {
-    @apply backdrop-blur w-screen h-screen absolute top-0 left-0 z-50;
+    @apply backdrop-blur-3xl w-screen h-screen absolute top-0 left-0 z-50;
 }
 
 .loaderContainer {

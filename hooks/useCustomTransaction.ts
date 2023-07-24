@@ -1,5 +1,3 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
 import {
   useAccount,
   useBalance,
@@ -10,6 +8,8 @@ import {
 } from "wagmi";
 import { parseEther } from "viem";
 import { toast } from "react-hot-toast";
+import { useDebounce } from "use-debounce";
+import { ChangeEventHandler, useEffect, useState } from "react";
 
 export const useCustomTransaction = () => {
   const { address } = useAccount();
@@ -29,7 +29,7 @@ export const useCustomTransaction = () => {
   const { data, sendTransaction } = useSendTransaction(config);
 
   const hash = data?.hash;
-  const { isLoading, isSuccess } = useWaitForTransaction({
+  const { isLoading, isSuccess, isFetchedAfterMount } = useWaitForTransaction({
     hash,
   });
 
@@ -41,10 +41,12 @@ export const useCustomTransaction = () => {
 
   useEffect(() => {
     if (prepareError?.name === "EstimateGasExecutionError")
-      toast.error("Insufficient funds for the operation");
+      toast.error("Insufficient funds for the operatiossn");
 
-    // if (isSuccess) toast.success("Transaction is successful");
-    // else toast.error("Something went wrong");
+    if (isFetchedAfterMount && isSuccess)
+      toast.success("Transaction is successful");
+    else if (isFetchedAfterMount && !isSuccess)
+      toast.error("Something went wrong");
   }, [prepareError, isSuccess]);
 
   return {
@@ -54,7 +56,6 @@ export const useCustomTransaction = () => {
     wallet,
     amount,
     isLoading,
-    isSuccess,
     balance: balanceData?.formatted,
     hash,
     gasPrice: feeData?.gasPrice,

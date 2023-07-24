@@ -1,5 +1,5 @@
-import { FC, ReactNode } from "react";
 import { WagmiConfig } from "wagmi";
+import { FC, ReactNode } from "react";
 import { Web3Modal } from "@web3modal/react";
 import { ethereumClient, projectId, wagmiConfig } from "@/utils/web3.config";
 

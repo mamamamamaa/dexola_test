@@ -1,11 +1,11 @@
-import { FC, FormEventHandler } from "react";
-import { useCustomTransaction } from "@/hooks/useCustomTransaction";
 import { toast } from "react-hot-toast";
-import { MAX_AMOUNT, MIN_AMOUNT, walletRegExp } from "@/consts/transaction";
+import { FC, FormEventHandler } from "react";
 import { amountValidation } from "@/utils/amountValidation";
-import style from "./TransactionForm.module.css";
-import { ButtonLoader } from "@/components/ButtonLoader/ButtonLoader";
+import { useCustomTransaction } from "@/hooks/useCustomTransaction";
+import { MAX_AMOUNT, MIN_AMOUNT, walletRegExp } from "@/consts/transaction";
 import { FormSubmitButton } from "@/components/FormSubmitButton/FormSubmitButton";
+
+import style from "./TransactionForm.module.css";
 
 export const TransactionForm: FC = () => {
   const {
