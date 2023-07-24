@@ -1,8 +1,10 @@
 import { FC } from "react";
 import { Web3Button } from "@web3modal/react";
 import { Logo } from "@/components/Logo";
-import { useAccount, useBalance } from "wagmi";
+import { useAccount } from "wagmi";
 import { Loader } from "@/components/Loader";
+
+import style from "./Header.module.css";
 
 export const Header: FC = () => {
   const { isConnecting, isReconnecting } = useAccount();
@@ -10,7 +12,7 @@ export const Header: FC = () => {
   if (isConnecting || isReconnecting) return <Loader />;
 
   return (
-    <header className="flex justify-between items-center gap-1">
+    <header className={style.header}>
       <Logo />
       <Web3Button balance={"show"} avatar={"hide"} icon={"hide"} />
     </header>
