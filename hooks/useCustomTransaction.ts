@@ -1,6 +1,8 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import {
+  useAccount,
+  useBalance,
   usePrepareSendTransaction,
   useSendTransaction,
   useWaitForTransaction,
@@ -9,6 +11,8 @@ import { parseEther } from "viem";
 import { toast } from "react-hot-toast";
 
 export const useCustomTransaction = () => {
+  const { address } = useAccount();
+  const { data: balanceData } = useBalance({ address });
   const [wallet, setWallet] = useState<string>("");
   const [debouncedWallet] = useDebounce(wallet, 500);
   const [amount, setAmount] = useState<string>("");
@@ -48,6 +52,7 @@ export const useCustomTransaction = () => {
     amount,
     isLoading,
     isSuccess,
+    balance: balanceData?.formatted,
     hash,
   };
 };

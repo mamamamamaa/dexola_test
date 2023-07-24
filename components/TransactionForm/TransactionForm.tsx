@@ -1,17 +1,30 @@
 import { FC, FormEventHandler } from "react";
 import { useCustomTransaction } from "@/hooks/useCustomTransaction";
-import style from "./WalletForm.module.css";
+import { toast } from "react-hot-toast";
+import { MAX_AMOUNT, MIN_AMOUNT, walletRegExp } from "@/consts/transaction";
+import style from "./TransactionForm.module.css";
 
-const walletRegexp = new RegExp(/^0x[a-fA-F0-9]{40}$/);
-
-export const WalletForm: FC = () => {
-  const { wallet, handleSetWallet, handleSetAmount, amount, sendTransaction } =
-    useCustomTransaction();
+export const TransactionForm: FC = () => {
+  const {
+    wallet,
+    handleSetWallet,
+    handleSetAmount,
+    amount,
+    balance,
+    sendTransaction,
+  } = useCustomTransaction();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    console.log("fdsfsdfsd");
+    const isValidWallet = walletRegExp.test(wallet);
+
+    if (!isValidWallet) return toast.error("Invalid wallet address");
+
+    console.log(Number(balance));
+    console.log(Number(amount));
+    console.log(Number(amount) < Number(balance));
+
     // sendTransaction?.();
   };
 
@@ -44,10 +57,9 @@ export const WalletForm: FC = () => {
                   id="amount"
                   name="amount"
                   type="number"
-                  min="0.000001"
-                  max="100000"
-                  step="0.000001"
-                  pattern="^0x[a-fA-F0-9]{40}$"
+                  min={MIN_AMOUNT}
+                  max={MAX_AMOUNT}
+                  step={MIN_AMOUNT}
                   className={style.input}
                   placeholder="Coin amount"
                   onChange={handleSetAmount}
