@@ -7,9 +7,9 @@ import { Loader } from "@/components/Loader/Loader";
 import style from "./Header.module.css";
 
 export const Header: FC = () => {
-  const { isConnecting, isReconnecting, isDisconnected } = useAccount();
+  const { isReconnecting } = useAccount();
 
-  if ((isConnecting && isDisconnected) || isReconnecting) return <Loader />;
+  if (isReconnecting) return <Loader />;
 
   return (
     <header className={style.header}>

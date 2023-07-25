@@ -9,6 +9,7 @@ import style from "./TransactionForm.module.css";
 
 export const TransactionForm: FC = () => {
   const {
+    ownAddress,
     wallet,
     handleSetWallet,
     handleSetAmount,
@@ -79,7 +80,10 @@ export const TransactionForm: FC = () => {
                 </label>
               </div>
               <div className={style.inputContainer}>
-                <FormSubmitButton isLoading={isLoading} />
+                <FormSubmitButton
+                  extraDisabledAction={!ownAddress}
+                  isLoading={isLoading}
+                />
               </div>
             </form>
           </div>
