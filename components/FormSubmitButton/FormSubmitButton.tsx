@@ -5,18 +5,11 @@ import style from "./FormSubmitButton.module.css";
 
 interface Props {
   isLoading: boolean;
-  extraDisabledAction: boolean;
 }
 
-export const FormSubmitButton: FC<Props> = ({
-  isLoading,
-  extraDisabledAction,
-}) => {
+export const FormSubmitButton: FC<Props> = ({ isLoading }) => {
   return (
-    <button
-      disabled={isLoading || extraDisabledAction}
-      className={style.submitButton}
-    >
+    <button disabled={isLoading} className={style.submitButton}>
       {isLoading ? <ButtonLoader /> : "Send"}
     </button>
   );

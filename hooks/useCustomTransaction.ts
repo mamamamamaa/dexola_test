@@ -50,7 +50,6 @@ export const useCustomTransaction = () => {
   }, [prepareError, isSuccess]);
 
   return {
-    ownAddress: address,
     handleSetAmount,
     handleSetWallet,
     sendTransaction,
